@@ -17,6 +17,7 @@ int sendmail(const char *to, const char *from, const char *subject, const char *
 {
     qDebug() << QString(QString::fromStdString(from));
 
+
     int retval = -1;
     FILE *mailpipe = popen("/usr/lib/sendmail -t", "w");
     if (mailpipe != NULL) {

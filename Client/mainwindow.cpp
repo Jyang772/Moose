@@ -25,10 +25,17 @@ void MainWindow::on_pushButton_clicked()
     string lawl = "\"" + ui->Name->text().toStdString() + "\"";
     string email = " <" + ui->From->text().toStdString() + ">";
 
+
+
     string tt  = lawl + email;
 
 
    // qDebug() << QString(QString::fromStdString(tt)) ;
    Anonymoose.sendmail((ui->To->text().toStdString()).c_str(), tt.c_str(), (ui->Subject->text().toStdString()).c_str(), (ui->Message->toPlainText().toStdString()).c_str());
 
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+     QMessageBox::information(this,"Info","Created by MicroPenguin");
 }

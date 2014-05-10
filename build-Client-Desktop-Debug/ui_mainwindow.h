@@ -17,6 +17,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
@@ -29,6 +30,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionAbout;
     QWidget *centralWidget;
     QLineEdit *To;
     QLabel *label;
@@ -42,6 +44,7 @@ public:
     QLabel *label_5;
     QLineEdit *Name;
     QMenuBar *menuBar;
+    QMenu *menuMenu;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -50,6 +53,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(532, 432);
+        actionAbout = new QAction(MainWindow);
+        actionAbout->setObjectName(QStringLiteral("actionAbout"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         To = new QLineEdit(centralWidget);
@@ -89,6 +94,10 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 532, 25));
+        menuBar->setDefaultUp(false);
+        menuBar->setNativeMenuBar(false);
+        menuMenu = new QMenu(menuBar);
+        menuMenu->setObjectName(QStringLiteral("menuMenu"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -102,6 +111,9 @@ public:
         QWidget::setTabOrder(Subject, Message);
         QWidget::setTabOrder(Message, pushButton);
 
+        menuBar->addAction(menuMenu->menuAction());
+        menuMenu->addAction(actionAbout);
+
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -109,13 +121,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Moose", 0));
+        actionAbout->setText(QApplication::translate("MainWindow", "About", 0));
         label->setText(QApplication::translate("MainWindow", "From: ", 0));
         label_2->setText(QApplication::translate("MainWindow", "To:", 0));
         label_3->setText(QApplication::translate("MainWindow", "Subject: ", 0));
         label_4->setText(QApplication::translate("MainWindow", "Message:", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Send!", 0));
         label_5->setText(QApplication::translate("MainWindow", "Name:", 0));
+        menuMenu->setTitle(QApplication::translate("MainWindow", "Menu", 0));
     } // retranslateUi
 
 };
